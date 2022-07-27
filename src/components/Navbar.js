@@ -1,164 +1,95 @@
-import React, { useContext } from "react";
-import AppBar from "@mui/material/AppBar";
-import Box from "@mui/material/Box";
-import Toolbar from "@mui/material/Toolbar";
-import IconButton from "@mui/material/IconButton";
-import Typography from "@mui/material/Typography";
-import Menu from "@mui/material/Menu";
-import Container from "@mui/material/Container";
-import Avatar from "@mui/material/Avatar";
-import Tooltip from "@mui/material/Tooltip";
-import MenuItem from "@mui/material/MenuItem";
-import homeIcon from "../assets/home.png";
-import { Link, useNavigate } from "react-router-dom";
-import { Button } from "@mui/material";
-import { AuthContext } from "../contexts/AuthContext";
-import { logOut } from "../helpers/userFunction";
-import "./Navbar.css";
+import * as React from 'react';
+import AppBar from '@mui/material/AppBar';
+import Box from '@mui/material/Box';
+import Toolbar from '@mui/material/Toolbar';
+import Typography from '@mui/material/Typography';
+import IconButton from '@mui/material/IconButton';
+import MenuIcon from '@mui/icons-material/Menu';
+import AccountCircle from '@mui/icons-material/AccountCircle';
+import Switch from '@mui/material/Switch';
+import FormControlLabel from '@mui/material/FormControlLabel';
+import FormGroup from '@mui/material/FormGroup';
+import MenuItem from '@mui/material/MenuItem';
+import Menu from '@mui/material/Menu';
 
-const Navbar = () => {
-  const { currentUser } = useContext(AuthContext);
-  const navigate = useNavigate();
+export default function MenuAppBar() {
+  const [auth, setAuth] = React.useState(true);
+  const [anchorEl, setAnchorEl] = React.useState(null);
 
-  // const currentUser = { displayName: "betul sonmez" };
-  // const currentUser = false;
-
-  const [anchorElNav, setAnchorElNav] = React.useState(null);
-  const [anchorElUser, setAnchorElUser] = React.useState(null);
-
-  const handleOpenNavMenu = (event) => {
-    setAnchorElNav(event.currentTarget);
-  };
-  const handleOpenUserMenu = (event) => {
-    setAnchorElUser(event.currentTarget);
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setAuth(event.target.checked);
   };
 
-  const handleCloseNavMenu = () => {
-    setAnchorElNav(null);
+  const handleMenu = (event: React.MouseEvent<HTMLElement>) => {
+    setAnchorEl(event.currentTarget);
   };
 
-  const handleCloseUserMenu = () => {
-    setAnchorElUser(null);
+  const handleClose = () => {
+    setAnchorEl(null);
   };
 
   return (
-    <AppBar className="navbar" position="static">
-      <Container maxWidth="xl" className="container">
-        <Toolbar disableGutters>
-          <Box sx={{ flexGrow: 1, display: "flex" }}>
-            <IconButton
-              size="large"
-              aria-label="account of current user"
-              aria-controls="menu-appbar"
-              aria-haspopup="true"
-              onClick={handleOpenNavMenu}
-              color="inherit"
-            >
-              <Link to={"/"}>
-                <img src={homeIcon} alt="home-icon" />
-              </Link>
-            </IconButton>
-            <Menu
-              id="menu-appbar"
-              anchorEl={anchorElNav}
-              anchorOrigin={{
-                vertical: "bottom",
-                horizontal: "left",
-              }}
-              keepMounted
-              transformOrigin={{
-                vertical: "top",
-                horizontal: "left",
-              }}
-              open={Boolean(anchorElNav)}
-              onClose={handleCloseNavMenu}
-              sx={{
-                display: { xs: "block", md: "none" },
-              }}
-            >
-              <Link to="/about">
-                <MenuItem onClick={handleCloseUserMenu}>About</MenuItem>
-              </Link>
-            </Menu>
-          </Box>
-
-          <Box className="header" sx={{ flexGrow: 1, display: "flex" }}>
-            <Typography
-              variant="h5"
-              component="h1"
-              onClick={() => navigate("/")}
-            >
-             ──── <span> {"<Betul/>"}</span> Blog ────
-            </Typography>
-          </Box>
-
-          {currentUser ? (
-            <Box className="userInf" sx={{ flexGrow: 0, display: "flex" }}>
-              <h5>{currentUser?.displayName}</h5>
-
-              <Box sx={{ flexGrow: 0, display: "flex" }}>
-                <Tooltip title="Open settings">
-                  <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                    <Avatar src="/broken-image.jpg" />
-                  </IconButton>
-                </Tooltip>
-                <Menu
-                  sx={{ mt: "45px" }}
-                  id="menu-appbar"
-                  anchorEl={anchorElUser}
-                  anchorOrigin={{
-                    vertical: "top",
-                    horizontal: "right",
-                  }}
-                  keepMounted
-                  transformOrigin={{
-                    vertical: "top",
-                    horizontal: "right",
-                  }}
-                  open={Boolean(anchorElUser)}
-                  onClose={handleCloseUserMenu}
-                >
-                  <Link className="link" to="/profile">
-                    <MenuItem value="profile" onClick={handleCloseUserMenu}>
-                      Profile
-                    </MenuItem>
-                  </Link>
-                  <Link className="link" to="/newblog">
-                    <MenuItem onClick={handleCloseUserMenu}>New</MenuItem>
-                  </Link>
-                  <Link className="link" to="/login">
-                    <MenuItem onClick={handleCloseUserMenu}>
-                      <Typography textAlign="center" onClick={() => logOut()}>
-                        Logout
-                      </Typography>
-                    </MenuItem>
-                  </Link>
-                </Menu>
-              </Box>
-            </Box>
-          ) : (
-            <Box className="buttons" sx={{ flexGrow: 0, display: "flex" }}>
-              <Button
-                className="button"
-                color="secondary"
-                variant="outlined"
-                onClick={() => navigate("/login")}
+    <Box sx={{ flexGrow: 1 }}>
+      <FormGroup>
+        <FormControlLabel
+          control={
+            <Switch
+              checked={auth}
+              onChange={handleChange}
+              aria-label="login switch"
+            />
+          }
+          label={auth ? 'Logout' : 'Login'}
+        />
+      </FormGroup>
+      <AppBar position="static">
+        <Toolbar>
+          <IconButton
+            size="large"
+            edge="start"
+            color="inherit"
+            aria-label="menu"
+            sx={{ mr: 2 }}
+          >
+            <MenuIcon />
+          </IconButton>
+          <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+            Photos
+          </Typography>
+          {auth && (
+            <div>
+              <IconButton
+                size="large"
+                aria-label="account of current user"
+                aria-controls="menu-appbar"
+                aria-haspopup="true"
+                onClick={handleMenu}
+                color="inherit"
               >
-                login
-              </Button>
-              <Button
-                className="button"
-                color="secondary"
-                variant="outlined"
-                onClick={() => navigate("/register")}
+                <AccountCircle />
+              </IconButton>
+              <Menu
+                id="menu-appbar"
+                anchorEl={anchorEl}
+                anchorOrigin={{
+                  vertical: 'top',
+                  horizontal: 'right',
+                }}
+                keepMounted
+                transformOrigin={{
+                  vertical: 'top',
+                  horizontal: 'right',
+                }}
+                open={Boolean(anchorEl)}
+                onClose={handleClose}
               >
-                Register
-              </Button>
-            </Box>
+                <MenuItem onClick={handleClose}>Profile</MenuItem>
+                <MenuItem onClick={handleClose}>My account</MenuItem>
+              </Menu>
+            </div>
           )}
         </Toolbar>
-      </Container>
-    </AppBar>
+      </AppBar>
+    </Box>
   );
-};
-export default Navbar;
+}

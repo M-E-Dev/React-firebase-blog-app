@@ -1,0 +1,81 @@
+
+
+/*----- BLOG CARDS --------- */
+
+.blogCardForm{
+    margin: 0 3rem;
+}
+
+.blogCardFormDetails .cardContainer{
+    /* background-color: #FFEEEE; */
+    box-shadow: 5px 10px 8px rgb(132, 132, 240);
+    margin: 2rem 0;
+    gap: 5rem;
+    width: 20rem;
+}
+.blogCardForm .cardContainer{
+    /* background-color: #FFEEEE; */
+    box-shadow: 5px 10px 8px rgb(132, 132, 240);
+    margin: 2rem 0;
+    gap: 5rem;
+    width: 20rem;
+}
+
+.cardContainer .cardImage {
+    object-fit: fill;
+    object-position: center;
+    /* cardlardaki img lere verilen efect :   */
+    filter: drop-shadow(8px 8px 10px gray);
+}
+
+.cardContainer .favBtn{
+    color: gray;
+    transition: 0.5s;
+    border-radius: 50%;
+}
+
+.cardContainer .active{
+    color: #930c0c;
+    transition: 0.5s;
+}
+
+.blogCardForm{
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    /* align-items: center; */
+}
+.blogCardFormDetails{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    
+}
+
+
+
+.cardBottom{
+display: flex;
+
+}
+
+.cardBottom .email{
+    font-size: 14px;
+    /* mail i sağ alt köşeye yapıştırmak için */
+    margin-top: auto;
+    margin-left: auto;
+}
+
+/* ------ SIDE BAR -------- */
+
+.sideBar{
+    color: blue;
+}
+
+.blogWarning {
+    color: red;
+    font-size: 18px;
+    margin-top: 1rem;
+}

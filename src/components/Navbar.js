@@ -11,10 +11,14 @@ import Menu from '@mui/material/Menu';
 import "./Navbar.css";
 import bikeLogo from "../assets/bike.png"
 import menuLogo from "../assets/menu.png"
+import { useAuth } from '../contexts/AuthContextProvider';
 
 export default function Navbar() {
+
   const [auth, setAuth] = React.useState(true);
   const [anchorEl, setAnchorEl] = React.useState(null);
+
+  const { currentUser } = useAuth();
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setAuth(event.target.checked);

@@ -28,9 +28,9 @@ export default function Navbar() {
   };
 
   return (
-    <Box sx={{ flexGrow: 1, color: "alert" }}>
-      <AppBar position="static" className="navbar">
-        <Toolbar>
+    <Box sx={{ flexGrow: 1 }}>
+      <AppBar position="static" style={{height:"100px"}}  >
+        <Toolbar >
           <IconButton
             size="large"
             edge="start"
@@ -38,9 +38,9 @@ export default function Navbar() {
             aria-label="menu"
             sx={{ mr: 2 }}
           >
-            <img src={bikeLogo} alt="" style={{borderRadius: "5px"}}/>
+            <img src={bikeLogo} alt="" sx={{ mr: 2 }} style={{borderRadius: "5px", backgroundColor:"inherit", height:"95px"}}/>
           </IconButton>
-          <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+          <Typography variant="h4" fontFamily="Girassol" component="div" sx={{ flexGrow: 1 }}>
             Superbikes Blog   
           </Typography>
           {auth && (

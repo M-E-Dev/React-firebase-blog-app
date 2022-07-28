@@ -1,12 +1,12 @@
 .navbar {
     font-family: 'Girassol', cursive;
-    background-color: #252525;
-    color: rgb(199, 24, 24);
+    background-color: #af2222;
+    color: rgb(41, 41, 41);
     display: flex;
     justify-content: space-between;
-    align-items: center;
+    align-items:center;
     padding: 0 2rem;
-    height: 4rem;
+    height: 7rem;
     position: sticky;
     top: 0px;
     z-index: 1;

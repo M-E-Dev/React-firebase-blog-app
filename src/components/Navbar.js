@@ -10,6 +10,7 @@ import MenuItem from '@mui/material/MenuItem';
 import Menu from '@mui/material/Menu';
 import "./Navbar.css";
 import bikeLogo from "../assets/bike.png"
+import menuLogo from "../assets/menu.png"
 
 export default function Navbar() {
   const [auth, setAuth] = React.useState(true);
@@ -28,7 +29,7 @@ export default function Navbar() {
   };
 
   return (
-    <Box sx={{ flexGrow: 1 }}>
+    <Box sx={{ flexGrow: 1, bgcolor:"success" }}>
       <AppBar position="static" style={{height:"100px"}}  >
         <Toolbar >
           <IconButton
@@ -53,7 +54,7 @@ export default function Navbar() {
                 onClick={handleMenu}
                 color="inherit"
               >
-                <AccountCircle />
+            <img src={menuLogo} alt="" sx={{ mr: 2 }} style={{borderRadius: "5px", backgroundColor:"inherit", height:"75px"}}/>
               </IconButton>
               <Menu
                 id="menu-appbar"

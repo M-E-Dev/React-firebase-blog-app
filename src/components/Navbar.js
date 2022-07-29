@@ -1,24 +1,23 @@
-import * as React from 'react';
-import AppBar from '@mui/material/AppBar';
-import Box from '@mui/material/Box';
-import Toolbar from '@mui/material/Toolbar';
-import Typography from '@mui/material/Typography';
-import IconButton from '@mui/material/IconButton';
-import MenuIcon from '@mui/icons-material/Menu';
-import AccountCircle from '@mui/icons-material/AccountCircle';
-import MenuItem from '@mui/material/MenuItem';
-import Menu from '@mui/material/Menu';
+import * as React from "react";
+import AppBar from "@mui/material/AppBar";
+import Box from "@mui/material/Box";
+import Toolbar from "@mui/material/Toolbar";
+import Typography from "@mui/material/Typography";
+import IconButton from "@mui/material/IconButton";
+import MenuItem from "@mui/material/MenuItem";
+import Menu from "@mui/material/Menu";
 import "./Navbar.css";
-import bikeLogo from "../assets/bike.png"
-import menuLogo from "../assets/menu.png"
-import { useAuth } from '../contexts/AuthContextProvider';
+import bikeLogo from "../assets/bike.png";
+import menuLogo from "../assets/menu.png";
+import { useAuth } from "../contexts/AuthContextProvider";
+import { Link } from "react-router-dom";
 
 export default function Navbar() {
-
   const [auth, setAuth] = React.useState(true);
   const [anchorEl, setAnchorEl] = React.useState(null);
 
-  const { currentUser } = useAuth();
+  const {currentUser} = useAuth();
+  console.log(currentUser)
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setAuth(event.target.checked);
@@ -33,9 +32,9 @@ export default function Navbar() {
   };
 
   return (
-    <Box sx={{ flexGrow: 1, bgcolor:"success" }}>
-      <AppBar position="static" style={{height:"100px"}}  >
-        <Toolbar >
+    <Box sx={{ flexGrow: 1, bgcolor: "success" }}>
+      <AppBar position="static" style={{ height: "100px" }}>
+        <Toolbar>
           <IconButton
             size="large"
             edge="start"
@@ -43,10 +42,24 @@ export default function Navbar() {
             aria-label="menu"
             sx={{ mr: 2 }}
           >
-            <img src={bikeLogo} alt="" sx={{ mr: 2 }} style={{borderRadius: "5px", backgroundColor:"inherit", height:"95px"}}/>
+            <img
+              src={bikeLogo}
+              alt=""
+              sx={{ mr: 2 }}
+              style={{
+                borderRadius: "5px",
+                backgroundColor: "inherit",
+                height: "95px",
+              }}
+            />
           </IconButton>
-          <Typography variant="h4" fontFamily="Girassol" component="div" sx={{ flexGrow: 1 }}>
-            Superbikes Blog   
+          <Typography
+            variant="h4"
+            fontFamily="Girassol"
+            component="div"
+            sx={{ flexGrow: 1 }}
+          >
+            Superbikes Blog
           </Typography>
           {auth && (
             <div>
@@ -58,26 +71,64 @@ export default function Navbar() {
                 onClick={handleMenu}
                 color="inherit"
               >
-            <img src={menuLogo} alt="" sx={{ mr: 2 }} style={{borderRadius: "5px", backgroundColor:"inherit", height:"75px"}}/>
+                <img
+                  src={menuLogo}
+                  alt=""
+                  sx={{ mr: 2 }}
+                  style={{
+                    borderRadius: "5px",
+                    backgroundColor: "inherit",
+                    height: "75px",
+                  }}
+                />
               </IconButton>
-              <Menu
+              {currentUser?.email ? (
+                <Menu
                 id="menu-appbar"
                 anchorEl={anchorEl}
                 anchorOrigin={{
-                  vertical: 'top',
-                  horizontal: 'right',
+                  vertical: "top",
+                  horizontal: "right",
                 }}
                 keepMounted
                 transformOrigin={{
-                  vertical: 'top',
-                  horizontal: 'right',
+                  vertical: "top",
+                  horizontal: "right",
                 }}
                 open={Boolean(anchorEl)}
                 onClose={handleClose}
               >
-                <MenuItem onClick={handleClose}>Profile</MenuItem>
-                <MenuItem onClick={handleClose}>My account</MenuItem>
+                <Link to="/login" >
+                  <MenuItem onClick={handleClose}>Logout</MenuItem>
+                </Link>
+                <Link to="/register">
+                  <MenuItem onClick={handleClose}>Profile</MenuItem>
+                </Link>
               </Menu>
+              ) : (
+                <Menu
+                  id="menu-appbar"
+                  anchorEl={anchorEl}
+                  anchorOrigin={{
+                    vertical: "top",
+                    horizontal: "right",
+                  }}
+                  keepMounted
+                  transformOrigin={{
+                    vertical: "top",
+                    horizontal: "right",
+                  }}
+                  open={Boolean(anchorEl)}
+                  onClose={handleClose}
+                >
+                  <Link to="/login" >
+                    <MenuItem onClick={handleClose}>Login</MenuItem>
+                  </Link>
+                  <Link to="/register">
+                    <MenuItem onClick={handleClose}>Register</MenuItem>
+                  </Link>
+                </Menu>
+              )}
             </div>
           )}
         </Toolbar>

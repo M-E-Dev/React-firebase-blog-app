@@ -1,10 +1,11 @@
 import React from "react";
-import BlogCard from "../components/BlogCard";
+// import BlogCard from "../components/BlogCard";
 
 const Dashboard = () => {
   return (
     <div>
-      <BlogCard/>
+      <h1>DASHBOARD</h1>
+      {/* <BlogCard/> */}
     </div>
   );
 };

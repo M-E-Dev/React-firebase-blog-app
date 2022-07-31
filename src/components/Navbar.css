@@ -1,15 +1,16 @@
 .navbar {
-    font-family: 'Girassol', cursive;
-    background-color: #af2222;
-    color: rgb(41, 41, 41);
-    display: flex;
-    justify-content: space-between;
-    align-items:center;
-    padding: 0 2rem;
-    height: 7rem;
-    position: sticky;
-    top: 0px;
-    z-index: 1;
+    /* font-family: 'Girassol', cursive; */
+    /* background-image: url(https://images.unsplash.com/photo-1589980843986-0b7438a4655f?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1716&q=80); */
+    /* background-position-y: 80%; */
+    /* color: rgb(41, 41, 41); */
+    /* display: flex; */
+    /* justify-content: space-between; */
+    /* align-items:center; */
+    /* padding: 0 2rem; */
+    /* height: 7rem; */
+    /* position: sticky; */
+    /* top: 0px; */
+    /* z-index: 1; */
 }
 
 .navbarButton {

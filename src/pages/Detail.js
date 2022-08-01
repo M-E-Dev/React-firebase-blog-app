@@ -17,6 +17,9 @@ import MoreVertIcon from '@mui/icons-material/MoreVert';
 import { useNavigate } from 'react-router-dom';
 import useAuth from "../components/Authorization"
 import { useBlog } from '../contexts/BlogContextProvider';
+import ChatBubbleOutlineIcon from '@mui/icons-material/ChatBubbleOutline';
+import { Button } from '@mui/material';
+
 
 interface ExpandMoreProps extends IconButtonProps {
   expand: boolean;
@@ -47,6 +50,9 @@ export default function Detail({match}) {
     navigate.push("/");
     alert("Deleted Successfully")
   }
+  const updateHandler = (id) => {
+    navigate.push(`/update-blog/${id}`);
+  };
   
   const [expanded, setExpanded] = React.useState(false);
 
@@ -84,11 +90,17 @@ export default function Detail({match}) {
       </CardContent>
       <CardActions disableSpacing>
         <IconButton aria-label="add to favorites">
-          <FavoriteIcon />
+          <FavoriteIcon color={res.get_like_count > 0 ? "secondary" : "disabled"} />
         </IconButton>
-        <IconButton aria-label="share">
-          <ShareIcon />
+        <Typography variant='body2' color="textSecondary">
+          {res.get_like_count}
+        </Typography>
+        <IconButton aria-label="comment count">
+          <ChatBubbleOutlineIcon />
         </IconButton>
+        <Typography variant='body2' color="textSecondary">
+          {res.get_comment_count}
+        </Typography>
         <ExpandMore
           expand={expanded}
           onClick={handleExpandClick}
@@ -127,6 +139,12 @@ export default function Detail({match}) {
           </Typography>
         </CardContent>
       </Collapse>
+      { res.author === currentUser?.email && (
+        <div>
+          <Button variant='contained' onClick={()=> updateHandler(res.id)}>Update</Button>
+          <Button variant='contained' color='secondary' onClick={()=> deleteHandler(res.id)}>Delete</Button>
+        </div>
+      ) }
     </Card>
   );
 }

@@ -8,6 +8,7 @@ import CardActions from '@mui/material/CardActions';
 import Collapse from '@mui/material/Collapse';
 import Avatar from '@mui/material/Avatar';
 import IconButton, { IconButtonProps } from '@mui/material/IconButton';
+import ChatBubbleOutlineIcon from '@mui/icons-material/ChatBubbleOutline';
 import Typography from '@mui/material/Typography';
 import { red } from '@mui/material/colors';
 import FavoriteIcon from '@mui/icons-material/Favorite';
@@ -80,19 +81,25 @@ export default function BlogCard({post}) {
       </CardContent>
       <CardActions disableSpacing>
         <IconButton aria-label="add to favorites">
-          <FavoriteIcon />
+          <FavoriteIcon color={get_like_count > 0 ? "secondary" : "disabled"} />
         </IconButton>
-        <IconButton aria-label="share">
-          <ShareIcon />
+        <Typography variant='body2' color="textSecondary">
+          {get_like_count}
+        </Typography>
+        <IconButton aria-label="comment count">
+          <ChatBubbleOutlineIcon />
         </IconButton>
-        <ExpandMore
+        <Typography variant='body2' color="textSecondary">
+          {get_comment_count}
+        </Typography>
+        {/* <ExpandMore
           expand={expanded}
           onClick={handleExpandClick}
           aria-expanded={expanded}
           aria-label="show more"
         >
           <ExpandMoreIcon />
-        </ExpandMore>
+        </ExpandMore> */}
       </CardActions>
       {/* <Collapse in={expanded} timeout="auto" unmountOnExit>
         <CardContent>
@@ -123,6 +130,7 @@ export default function BlogCard({post}) {
           </Typography>
         </CardContent>
       </Collapse> */}
+      
     </Card>
   );
 }

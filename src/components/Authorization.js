@@ -15,7 +15,7 @@ import Grid from "@mui/material/Grid";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-import authPng from "../assets/auth.png"
+import authPng from "../assets/auth.png";
 
 const SignupSchema = Yup.object().shape({
   firstName: Yup.string()
@@ -30,10 +30,37 @@ const SignupSchema = Yup.object().shape({
 });
 
 const LoginAndRegisterForm = (props) => {
+  const {loginWithGoogle} = useAuth();
+  const handleGoogleProvider = () => {
+    loginWithGoogle();
+  }
+  const { handleChange, handleBlur, errors, isSubmitting, values, touched } =
+    props;
+
   return (
-    <Grid container justifyContent="center" sx={{ height:"87vh", backgroundRepeat: "no-repeat", backgroundSize: "cover", backgroundPosition: "center", height: "87vh", 
-    backgroundImage: "url(https://images.unsplash.com/photo-1650355984861-adc971b4343f?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80)"}}>
-      <Grid item xs={12} sm={8} md={5} component={Paper} elevation={12} square sx={{width:"60vf", height:"60vh", mt:8, borderRadius:5}}>
+    <Grid
+      container
+      justifyContent="center"
+      sx={{
+        height: "87vh",
+        backgroundRepeat: "no-repeat",
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+        height: "87vh",
+        backgroundImage:
+          "url(https://images.unsplash.com/photo-1650355984861-adc971b4343f?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80)",
+      }}
+    >
+      <Grid
+        item
+        xs={12}
+        sm={8}
+        md={5}
+        component={Paper}
+        elevation={12}
+        square
+        sx={{ width: "60vf", height: "60vh", mt: 8, borderRadius: 5 }}
+      >
         <Box
           sx={{
             my: 2,
@@ -43,13 +70,17 @@ const LoginAndRegisterForm = (props) => {
             alignItems: "center",
           }}
         >
-          <Grid sx={{ m: 1}}>
-            <img src={authPng} sx={{ mr: 2 }} style={{backgroundColor: "inherit", height: "125px"}}/>
-          </Grid>
+          <div sx={{ m: 1 }}>
+            <img
+              src={authPng}
+              sx={{ mr: 2 }}
+              style={{ backgroundColor: "inherit", height: "125px" }}
+            />
+          </div>
           <Typography component="h1" variant="h5">
-            {props.method}
+            ---{props.method}---
           </Typography>
-          <Box component="form" noValidate sx={{ mt: 1 }}>
+          <Form noValidate sx={{ mt: 1 }}>
             <TextField
               margin="normal"
               required
@@ -60,7 +91,12 @@ const LoginAndRegisterForm = (props) => {
               autoComplete="email"
               autoFocus
               size="small"
-              />
+              onChange={handleChange}
+              onBlur={handleBlur}
+              value={values.email}
+              error={touched.email && Boolean(errors.email)}
+              helperText={touched.email && errors.email}
+            />
             <TextField
               margin="normal"
               required
@@ -71,19 +107,49 @@ const LoginAndRegisterForm = (props) => {
               id="password"
               autoComplete="current-password"
               size="small"
+              onChange={handleChange}
+              onBlur={handleBlur}
+              value={values.email}
+              error={touched.email && Boolean(errors.email)}
+              helperText={touched.email && errors.email}
             />
-            <FormControlLabel
+            {/* <FormControlLabel
               control={<Checkbox value="remember" color="primary" />}
               label="Remember me"
-            />
-            <Button
-              type="submit"
-              fullWidth
-              variant="contained"
-              sx={{ mt: 3, mb: 2 }}
-            >
-              {props.method}
-            </Button>
+            /> */}
+            {isSubmitting ? (
+              <div className="loadingContainer" style={{ height: "15vh" }}>
+                <img
+                  style={{
+                    marginTop: "40px",
+                    height: "15vh",
+                    borderRadius: "15px",
+                  }}
+                  src="https://media0.giphy.com/media/J2zYeWkFypRR1d6s4d/giphy.gif?cid=790b761102a2bdf8b6221bf69ff337ca6d56472b0171ab20&rid=giphy.gif&ct=g"
+                  alt="loading"
+                  className="loadingGif"
+                />
+              </div>
+            ) : (
+              <div>
+                <Button
+                  type="submit"
+                  fullWidth
+                  variant="contained"
+                  sx={{ mt: 3, mb: 2 }}
+                >
+                  {props.method}
+                </Button>
+                <Button fullWidth variant="contained" sx={{ m: "0", p: "0" }} onClick={handleGoogleProvider} >
+                  with
+                  <img
+                    src="https://www.freepnglogos.com/uploads/google-logo-png/google-logo-png-google-sva-scholarship-20.png"
+                    alt=""
+                    style={{ height: "3vh", margin: "5px", padding: "5px" }}
+                  />
+                </Button>
+              </div>
+            )}
             {/* <Grid container alignItems="center" >
               <Grid item xs>
                 <Link href="#" variant="body2">
@@ -96,7 +162,7 @@ const LoginAndRegisterForm = (props) => {
                 </Link>
               </Grid>
             </Grid> */}
-          </Box>
+          </Form>
         </Box>
       </Grid>
     </Grid>

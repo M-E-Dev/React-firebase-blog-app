@@ -138,8 +138,11 @@ export default function Navbar() {
                   open={Boolean(anchorEl)}
                   onClose={handleClose}
                 >
-                  <Link to="/authorization" >
-                    <MenuItem onClick={handleClose}>Authorization</MenuItem>
+                  <Link to="/login" >
+                    <MenuItem onClick={handleClose}>Login</MenuItem>
+                  </Link>
+                  <Link to="/register" >
+                    <MenuItem onClick={handleClose}>Register</MenuItem>
                   </Link>
                 </Menu>
               )}

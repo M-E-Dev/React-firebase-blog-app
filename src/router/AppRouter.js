@@ -11,6 +11,7 @@ import NotFound from "../pages/NotFound";
 import PrivateRouter from "./PrivateRouter";
 import Navbar from "../components/Navbar";
 import Authorization from "../components/Authorization";
+import { Login, Register } from "../pages/LoginRegister";
 
 const AppRouter = () => {
   return (
@@ -26,7 +27,8 @@ const AppRouter = () => {
 
         <Route path="/" exact element={<Dashboard />} />
         <Route path="/about" element={<About />} />
-        <Route path="/authorization" element={<Authorization />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </BrowserRouter>

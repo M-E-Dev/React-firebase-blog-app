@@ -1,7 +1,7 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import About from "../pages/About";
 import Dashboard from "../pages/Dashboard";
-import Details from "../pages/Details";
+import Detail from "../pages/Detail";
 // import Login from "../pages/Login";
 import NewBlog from "../pages/NewBlog";
 import Profile from "../pages/Profile";
@@ -20,7 +20,7 @@ const AppRouter = () => {
       <Routes>
         <Route element={<PrivateRouter />}>
           <Route path="/profile" element={<Profile />} />              
-          <Route path="/details/:id" element={<Details />} />
+          <Route path="/detail/:id" element={<Detail />} />
           <Route path="/newblog" element={<NewBlog />} />
           <Route path="/updateblog/:id" element={<UpdateBlog />} />
         </Route>

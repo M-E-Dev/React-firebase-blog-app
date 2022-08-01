@@ -16,6 +16,7 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import { useNavigate } from 'react-router-dom';
 import useAuth from "../components/Authorization"
+import { useBlog } from '../contexts/BlogContextProvider';
 
 interface ExpandMoreProps extends IconButtonProps {
   expand: boolean;
@@ -32,18 +33,21 @@ const ExpandMore = styled((props: ExpandMoreProps) => {
   }),
 }));
 
-export default function BlogCard({post}) {
+export default function Detail({match}) {
 
-  const { id, author, content, get_comment_count, get_like_count, image, published_date, title } = post;
+  // const { id, author, content, get_comment_count, get_like_count, image, published_date, title } = match ;
   const navigate = useNavigate();
   const { currentUser } = useAuth();
-  const openDetails = () => {
-    if (!currentUser) {
-      alert("Please Login to see the details")
-    }
-    navigate.push(`/detail/${id}`);
-  }
+  const { getOneBlog, deleteOneBlog } = useBlog()
+  const result = getOneBlog(match.params.id)
+  const res = result ? result[0] : { title: "", content: "", image: "" }
 
+  const deleteHandler = (id) => {
+    deleteOneBlog(id);
+    navigate.push("/");
+    alert("Deleted Successfully")
+  }
+  
   const [expanded, setExpanded] = React.useState(false);
 
   const handleExpandClick = () => {
@@ -52,6 +56,7 @@ export default function BlogCard({post}) {
 
   return (
     <Card sx={{ maxWidth: 345 }} >
+      <Typography variant='h3' noWrap >DETAILS</Typography>
       <CardHeader
         avatar={
           <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">
@@ -63,19 +68,18 @@ export default function BlogCard({post}) {
             <MoreVertIcon />
           </IconButton>
         }
-        title={title + " " +"(by " + author + ")"}
-        subheader={published_date}
+        title={res.title + " " +"(by " + res.author + ")"}
+        subheader={res.published_date}
       />
       <CardMedia
         component="img"
         height="194"
-        image={image || title}
-        alt={title}
-        onClick={openDetails}
+        image={res.image || res.title}
+        alt={res.title}
       />
       <CardContent>
         <Typography variant="body2" color="text.secondary">
-          {content}
+          {res.content}
         </Typography>
       </CardContent>
       <CardActions disableSpacing>
@@ -94,7 +98,7 @@ export default function BlogCard({post}) {
           <ExpandMoreIcon />
         </ExpandMore>
       </CardActions>
-      {/* <Collapse in={expanded} timeout="auto" unmountOnExit>
+      <Collapse in={expanded} timeout="auto" unmountOnExit>
         <CardContent>
           <Typography paragraph>Method:</Typography>
           <Typography paragraph>
@@ -122,7 +126,7 @@ export default function BlogCard({post}) {
             Set aside off of the heat to let rest for 10 minutes, and then serve.
           </Typography>
         </CardContent>
-      </Collapse> */}
+      </Collapse>
     </Card>
   );
 }

@@ -16,16 +16,17 @@ import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import authPng from "../assets/auth.png";
+import { Login } from "../pages/LoginRegister";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const SignupSchema = Yup.object().shape({
   firstName: Yup.string()
     .min(2, "Too Short!")
-    .max(20, "Too Long!")
-    .required("Required"),
+    .max(20, "Too Long!"),
   lastName: Yup.string()
     .min(2, "Too Short!")
-    .max(20, "Too Long!")
-    .required("Required"),
+    .max(20, "Too Long!"),
   email: Yup.string().email("Invalid email").required("Required"),
 });
 
@@ -34,8 +35,10 @@ const LoginAndRegisterForm = (props) => {
   const handleGoogleProvider = () => {
     loginWithGoogle();
   }
-  const { handleChange, handleBlur, errors, isSubmitting, values, touched } =
+  const { handleChange, handleBlur, errors, isSubmitting, values, touched, method} =
     props;
+
+  console.log(props);
 
   return (
     <Grid
@@ -78,7 +81,7 @@ const LoginAndRegisterForm = (props) => {
             />
           </div>
           <Typography component="h1" variant="h5">
-            ---{props.method}---
+            ~~~{method}~~~
           </Typography>
           <Form noValidate sx={{ mt: 1 }}>
             <TextField
@@ -105,13 +108,13 @@ const LoginAndRegisterForm = (props) => {
               label="Password"
               type="password"
               id="password"
-              autoComplete="current-password"
+              autoComplete="password"
               size="small"
               onChange={handleChange}
               onBlur={handleBlur}
-              value={values.email}
-              error={touched.email && Boolean(errors.email)}
-              helperText={touched.email && errors.email}
+              value={values.password}
+              error={touched.password && Boolean(errors.password)}
+              helperText={touched.password && errors.password}
             />
             {/* <FormControlLabel
               control={<Checkbox value="remember" color="primary" />}
@@ -138,7 +141,7 @@ const LoginAndRegisterForm = (props) => {
                   variant="contained"
                   sx={{ mt: 3, mb: 2 }}
                 >
-                  {props.method}
+                  {method}
                 </Button>
                 <Button fullWidth variant="contained" sx={{ m: "0", p: "0" }} onClick={handleGoogleProvider} >
                   with
@@ -169,10 +172,10 @@ const LoginAndRegisterForm = (props) => {
   );
 };
 
-const Authorization = () => {
+const Authorization = (props) => {
   const navigate = useNavigate();
   const { signup, login, currentUser } = useAuth();
-  // const method = useState(props.method);
+  const [method] = useState(props.method);
 
   useEffect(() => {
     if (currentUser) {
@@ -185,13 +188,34 @@ const Authorization = () => {
     <div>
       <Formik
         initialValues={{
-          firstName: "",
-          lastName: "",
-          email: "",
+         email: "",
+         password: ""
         }}
         validationSchema={SignupSchema}
-        onSubmit={(values, actions) => {}}
-        component={LoginAndRegisterForm}
+        onSubmit={(values, actions) => {
+          if (method === "Login") {
+            login(values.email, values.password).then(()=> {
+              alert(`${method} successfull!`);
+              navigate("/");
+              actions.setSubmitting(false)
+            }).catch((err) => {
+              alert(err.message);
+              actions.setSubmitting(false);
+              actions.resetForm();
+            })
+          } else {
+            signup(values.email, values.password).then(()=> {
+              alert(`${method} successfull!`);
+              navigate("/");
+              actions.setSubmitting(false)
+            }).catch((err) => {
+              alert(err.message);
+              actions.setSubmitting(false);
+              actions.resetForm();
+            })
+          }
+        }}
+        component={(props) => <LoginAndRegisterForm method={method} {...props}/>}
       ></Formik>
     </div>
   );

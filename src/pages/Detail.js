@@ -42,16 +42,17 @@ export default function Detail({match}) {
   const navigate = useNavigate();
   const { currentUser } = useAuth();
   const { getOneBlog, deleteOneBlog } = useBlog()
+  // match -> params, isExact, path, url içerir
   const result = getOneBlog(match.params.id)
   const res = result ? result[0] : { title: "", content: "", image: "" }
 
   const deleteHandler = (id) => {
     deleteOneBlog(id);
-    navigate.push("/");
+    navigate("/");
     alert("Deleted Successfully")
   }
   const updateHandler = (id) => {
-    navigate.push(`/update-blog/${id}`);
+    navigate(`/update-blog/${id}`);
   };
   
   const [expanded, setExpanded] = React.useState(false);

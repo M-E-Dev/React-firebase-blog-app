@@ -13,6 +13,11 @@
     /* z-index: 1; */
 }
 
+.dashboard{
+    display: block;
+    
+}
+
 .navbarButton {
     color: whitesmoke;
 }

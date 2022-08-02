@@ -18,10 +18,10 @@ export default function Navbar() {
   const [auth, setAuth] = React.useState(true);
   const [anchorEl, setAnchorEl] = React.useState(null);
 
-  const {currentUser, logout} = useAuth();
-  console.log(currentUser)
+  const { currentUser, logout } = useAuth();
+  console.log(currentUser);
 
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setAuth(event.target.checked);
@@ -46,27 +46,32 @@ export default function Navbar() {
 
   return (
     <Box sx={{ flexGrow: 1 }}>
-      <AppBar position="static" style={{ height: "13vh" }} className="navbar">
+      <AppBar position="static" style={{ height: "20vh" }} className="navbar">
         <Toolbar>
-          <IconButton
-            size="large"
-            edge="start"
-            color="inherit"
-            aria-label="menu"
-            sx={{ mr: 2 }}
-            onClick={() => navigate("/dashboard")}
-          >
-            <img
-              src={bikeLogo}
-              alt=""
+          <div className="dashboard">
+            <IconButton
+              size="large"
+              edge="start"
+              color="inherit"
+              aria-label="menu"
               sx={{ mr: 2 }}
-              style={{
-                borderRadius: "5px",
-                backgroundColor: "inherit",
-                height: "95px",
-              }}
-            />
-          </IconButton>
+              onClick={() => navigate("/")}
+            >
+              <img
+                src={bikeLogo}
+                alt=""
+                sx={{ mr: 2 }}
+                style={{
+                  borderRadius: "5px",
+                  backgroundColor: "inherit",
+                  height: "95px",
+                }}
+              />
+            </IconButton>
+            <Typography variant="h6" fontFamily="Girassol">
+              Dashboard
+            </Typography>
+          </div>
           <Typography
             variant="h4"
             fontFamily="Girassol"
@@ -96,32 +101,35 @@ export default function Navbar() {
                   }}
                 />
               </IconButton>
+              <Typography variant="h6" fontFamily="Girassol">
+                Menu
+              </Typography>
               {currentUser?.email ? (
                 <Menu
-                id="menu-appbar"
-                anchorEl={anchorEl}
-                anchorOrigin={{
-                  vertical: "top",
-                  horizontal: "right",
-                }}
-                keepMounted
-                transformOrigin={{
-                  vertical: "top",
-                  horizontal: "right",
-                }}
-                open={Boolean(anchorEl)}
-                onClose={handleClose}
-              >
-                <Link to="/profile" >
-                  <MenuItem onClick={handleClose}>Profile</MenuItem>
-                </Link>
-                <Link to="/new-blog" >
-                  <MenuItem onClick={handleClose}>New Blog</MenuItem>
-                </Link>
-                <Link to="/login">
-                  <MenuItem onClick={handleLogout}>Logout</MenuItem>
-                </Link>
-              </Menu>
+                  id="menu-appbar"
+                  anchorEl={anchorEl}
+                  anchorOrigin={{
+                    vertical: "top",
+                    horizontal: "right",
+                  }}
+                  keepMounted
+                  transformOrigin={{
+                    vertical: "top",
+                    horizontal: "right",
+                  }}
+                  open={Boolean(anchorEl)}
+                  onClose={handleClose}
+                >
+                  <Link to="/profile">
+                    <MenuItem onClick={handleClose}>Profile</MenuItem>
+                  </Link>
+                  <Link to="/new-blog">
+                    <MenuItem onClick={handleClose}>New Blog</MenuItem>
+                  </Link>
+                  <Link to="/login">
+                    <MenuItem onClick={handleLogout}>Logout</MenuItem>
+                  </Link>
+                </Menu>
               ) : (
                 <Menu
                   id="menu-appbar"
@@ -138,10 +146,10 @@ export default function Navbar() {
                   open={Boolean(anchorEl)}
                   onClose={handleClose}
                 >
-                  <Link to="/login" >
+                  <Link to="/login">
                     <MenuItem onClick={handleClose}>Login</MenuItem>
                   </Link>
-                  <Link to="/register" >
+                  <Link to="/register">
                     <MenuItem onClick={handleClose}>Register</MenuItem>
                   </Link>
                 </Menu>

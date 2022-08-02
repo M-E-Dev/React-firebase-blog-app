@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react'
-import { useNavigate } from 'react-router-dom';
+import React, { useEffect, useMemo, useState } from 'react'
+import { useNavigate, useParams } from 'react-router-dom';
 import { useAuth } from '../contexts/AuthContextProvider'
 import { useBlog } from '../contexts/BlogContextProvider';
 import { Grid, TextField, Button, Stack, Box } from "@mui/material";
@@ -7,13 +7,18 @@ import { BlogForm } from '../components/BlogForm';
 import placeholderPng from "../assets/placeholder.png"
 
 
-const UpdateBlog = ({match}) => {
+const UpdateBlog = () => {
 
-  const navigate = useNavigate();
   const { getOneBlog, updateBlog } = useBlog();
-  const result = getOneBlog(match.params.id);
+  const navigate = useNavigate();
+  const {id} = useParams();
+  const result = getOneBlog(id)
+
   // Result gelmemişse hata almamak için conditional kullandık
-  const res = result ? result[0] : { title: "", content: "", image: "" }
+  const res = useMemo(()=>{
+    return result ? result[0] : { title: "", content: "", image: "" }
+  }, [result])
+
   const [updatedBlog, setUpdatedBlog] = useState(res);
   
   useEffect(() => {
@@ -34,15 +39,15 @@ const UpdateBlog = ({match}) => {
 
   return (
     <div
-      style={{ display: "flex", justifyContent: "center", marginTop: "3rem" }}
+      style={{ display: "flex", justifyContent: "center", marginTop: "3rem"}}
     >
       <Grid
         container
         textAlign="center"
         direction="column"
-        style={{ width: "300px" }}
+        style={{ width: "150px" }}
       >
-        <img src={updatedBlog?.image || placeholderPng} alt="blog" />
+        <img src={updatedBlog?.image || placeholderPng} alt="blog" style={{ width: "300px" }}/>
         <h2 className="contact-header">────Update Blog────</h2>
 
         <BlogForm blog={updatedBlog} handler={handler} />

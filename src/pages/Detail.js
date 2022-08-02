@@ -14,8 +14,8 @@ import FavoriteIcon from '@mui/icons-material/Favorite';
 import ShareIcon from '@mui/icons-material/Share';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
-import { useNavigate } from 'react-router-dom';
-import useAuth from "../components/Authorization"
+import { useNavigate, useParams  } from 'react-router-dom';
+import { useAuth } from "../contexts/AuthContextProvider"
 import { useBlog } from '../contexts/BlogContextProvider';
 import ChatBubbleOutlineIcon from '@mui/icons-material/ChatBubbleOutline';
 import { Button } from '@mui/material';
@@ -36,15 +36,16 @@ const ExpandMore = styled((props: ExpandMoreProps) => {
   }),
 }));
 
-export default function Detail({match}) {
+export default function Detail() {
 
   // const { id, author, content, get_comment_count, get_like_count, image, published_date, title } = match ;
   const navigate = useNavigate();
   const { currentUser } = useAuth();
-  const { getOneBlog, deleteOneBlog } = useBlog()
-  // match -> params, isExact, path, url içerir
-  const result = getOneBlog(match.params.id)
+  const { getOneBlog, deleteOneBlog } = useBlog();
+  const {id} = useParams();
+  const result = getOneBlog(id)
   const res = result ? result[0] : { title: "", content: "", image: "" }
+
 
   const deleteHandler = (id) => {
     deleteOneBlog(id);

@@ -29,10 +29,9 @@ const Dashboard = () => {
                   className="loadingGif"
                 />
               ) : currentBlogs? (
-                currentBlogs.map((item, id) => (
-                  <Grid key={id} item>
-                    <BlogCard post={item} />
-                  </Grid>
+                // console.log(currentBlogs)
+                currentBlogs.map((item, index) => (
+                    <BlogCard post={item} key={index}/>
                 ))
               ) : (
                 <h3>No data avaible!</h3>

@@ -18,7 +18,7 @@ export const BlogContextProvider = ({children}) => {
     function deleteOneBlog(id) {
         const contactRef = firebaseDB.ref("blogs").child(id);
         contactRef.remove();}
-    function updateOneBlog(id, data) {
+    function updateBlog(id, data) {
         const contactRef = firebaseDB.ref("blogs").child(id);
         contactRef.update(data);}
     useEffect(() =>{
@@ -33,7 +33,7 @@ export const BlogContextProvider = ({children}) => {
         })
     }, [])
 
-    const value = { addBlog, currentBlogs, getOneBlog, deleteOneBlog, updateOneBlog }
+    const value = { addBlog, currentBlogs, getOneBlog, deleteOneBlog, updateBlog }
 
   return (
     <BlogContext.Provider value={value}>{children}</BlogContext.Provider>

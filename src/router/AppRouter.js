@@ -4,9 +4,9 @@ import Dashboard from "../pages/Dashboard";
 import Detail from "../pages/Detail";
 // import Login from "../pages/Login";
 import NewBlog from "../pages/NewBlog";
+import UpdateBlog from "../pages/UpdateBlog";
 import Profile from "../pages/Profile";
 // import Register from "../pages/Register";
-import UpdateBlog from "../pages/UpdateBlog";
 import NotFound from "../pages/NotFound";
 import PrivateRouter from "./PrivateRouter";
 import Navbar from "../components/Navbar";
@@ -21,8 +21,8 @@ const AppRouter = () => {
         <Route element={<PrivateRouter />}>
           <Route path="/profile" element={<Profile />} />              
           <Route path="/detail/:id" element={<Detail />} />
-          <Route path="/newblog" element={<NewBlog />} />
-          <Route path="/updateblog/:id" element={<UpdateBlog />} />
+          <Route path="/new-blog" element={<NewBlog />} />
+          <Route path="/update-blog/:id" element={<UpdateBlog />} />
         </Route>
 
         <Route path="/" exact element={<Dashboard />} />

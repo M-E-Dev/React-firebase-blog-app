@@ -1,12 +1,59 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
+import { useNavigate } from 'react-router-dom';
+import { useAuth } from '../contexts/AuthContextProvider'
+import { useBlog } from '../contexts/BlogContextProvider';
+import { Grid, TextField, Button, Stack, Box } from "@mui/material";
+import { BlogForm } from '../components/BlogForm';
+import placeholderPng from "../assets/placeholder.png"
 
-const UpdateBlog = () => {
+
+const UpdateBlog = ({match}) => {
+
+  const navigate = useNavigate();
+  const { getOneBlog, updateBlog } = useBlog();
+  const result = getOneBlog(match.params.id);
+  // Result gelmemişse hata almamak için conditional kullandık
+  const res = result ? result[0] : { title: "", content: "", image: "" }
+  const [updatedBlog, setUpdatedBlog] = useState(res);
+  
+  useEffect(() => {
+    setUpdatedBlog(res)
+  }, [res])
+
+  const handler = (blogToUpdate) => {
+    try{
+      // update ile yeni key eklenmez ama add ile eklenir
+      updateBlog(res?.id, blogToUpdate);
+      navigate("/")
+      alert("Blog updated...")
+    } catch {
+      alert("Cannot updated...")
+    };
+  };
+
+
   return (
-    <div>UpdateBlog</div>
+    <div
+      style={{ display: "flex", justifyContent: "center", marginTop: "3rem" }}
+    >
+      <Grid
+        container
+        textAlign="center"
+        direction="column"
+        style={{ width: "300px" }}
+      >
+        <img src={updatedBlog?.image || placeholderPng} alt="blog" />
+        <h2 className="contact-header">────Update Blog────</h2>
+
+        <BlogForm blog={updatedBlog} handler={handler} />
+
+
+      </Grid>
+    </div>
   )
 }
 
-export default UpdateBlog
+export default UpdateBlog;
 
 
 

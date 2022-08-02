@@ -1,12 +1,58 @@
 import React from 'react'
+import { useNavigate } from 'react-router-dom';
+import { useAuth } from '../contexts/AuthContextProvider'
+import { useBlog } from '../contexts/BlogContextProvider';
+import { Grid, TextField, Button, Stack, Box } from "@mui/material";
+import { BlogForm } from '../components/BlogForm';
+
 
 const NewBlog = () => {
+  const { currentUser } = useAuth();
+  const { addBlog } = useBlog();
+  const navigate = useNavigate();
+
+  const blog = {
+    author: currentUser.email,
+    title: "",
+    content: "",
+    get_comment_count: 0,
+    get_like_count: 0,
+    image: "",
+    published_date: Date.now()
+  };
+
+  const handler = (newBlog) => {
+    try{
+      // update ile yeni key eklenmez ama add ile eklenir
+      addBlog(newBlog);
+      navigate("/")
+      alert("Blog added...")
+    } catch {
+      alert("Cannot be added...")
+    }
+  }
+
   return (
-    <div>NewBlog</div>
+    <div
+      style={{ display: "flex", justifyContent: "center", marginTop: "3rem" }}
+    >
+      <Grid
+        container
+        textAlign="center"
+        direction="column"
+        style={{ width: "300px" }}
+      >
+        <h2 className="contact-header">────New Blog────</h2>
+
+        <BlogForm blog={blog} handler={handler} />
+
+
+      </Grid>
+    </div>
   )
 }
 
-export default NewBlog
+export default NewBlog;
 
 // import React, { useContext } from "react";
 // import { Grid, TextField, Button, Stack, Box } from "@mui/material";

@@ -46,9 +46,12 @@ export default function Navbar() {
 
   return (
     <Box sx={{ flexGrow: 1 }}>
-      <AppBar position="static" style={{ height: "20vh" }} className="navbar">
+      <AppBar position="static" style={{ height: "18vh" }} className="navbar">
         <Toolbar>
           <div className="dashboard">
+            <Typography variant="h6" fontFamily="Girassol">
+              Dashboard
+            </Typography>
             <IconButton
               size="large"
               edge="start"
@@ -68,9 +71,6 @@ export default function Navbar() {
                 }}
               />
             </IconButton>
-            <Typography variant="h6" fontFamily="Girassol">
-              Dashboard
-            </Typography>
           </div>
           <Typography
             variant="h4"
@@ -82,6 +82,9 @@ export default function Navbar() {
           </Typography>
           {auth && (
             <div>
+              <Typography variant="h6" fontFamily="Girassol">
+                Menu
+              </Typography>
               <IconButton
                 size="large"
                 aria-label="account of current user"
@@ -101,9 +104,6 @@ export default function Navbar() {
                   }}
                 />
               </IconButton>
-              <Typography variant="h6" fontFamily="Girassol">
-                Menu
-              </Typography>
               {currentUser?.email ? (
                 <Menu
                   id="menu-appbar"

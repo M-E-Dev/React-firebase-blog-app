@@ -63,7 +63,7 @@ export default function Detail() {
 
   return (
     <Grid container justifyContent="center">
-      <Card sx={{ maxWidth: 345, mt:10 }}>
+      <Card sx={{ maxWidth: 345, mt:2 }}>
         <Typography variant="h3" noWrap>
           DETAILS
         </Typography>

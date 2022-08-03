@@ -10,10 +10,10 @@ const Dashboard = () => {
   return (
     <div>
       <Grid >
-        <Typography variant="h3" noWrap>
-          Dashboard
+        <Typography variant="h6" noWrap sx={{ mt:"20px" }}>
+          To see details of a blog, click to its image...
         </Typography>
-        <Grid container justifyContent="center" sx={{ mt:"40px" }}>
+        <Grid container justifyContent="center" sx={{ mt:"50px" }}>
           <Grid item xs={12}>
             <Grid container justifyContent="center" spacing={5}>
               {currentBlogs === undefined ? (

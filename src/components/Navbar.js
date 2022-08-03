@@ -13,6 +13,8 @@ import { useAuth } from "../contexts/AuthContextProvider";
 import { Link, Navigate, useNavigate } from "react-router-dom";
 import { Logout } from "@mui/icons-material";
 import Dashboard from "../pages/Dashboard";
+import { grey, blue, red } from '@mui/material/colors';
+
 
 export default function Navbar() {
   const [auth, setAuth] = React.useState(true);
@@ -45,13 +47,10 @@ export default function Navbar() {
   // }
 
   return (
-    <Box sx={{ flexGrow: 1 }}>
-      <AppBar position="static" style={{ height: "18vh" }} className="navbar">
+    <Box sx={{ flexGrow: 1, bgcolor: red[500]}}>
+      <AppBar position="static" style={{ height: "15vh" }} sx={{ bgcolor: red[900]}}className="navbar">
         <Toolbar>
           <div className="dashboard">
-            <Typography variant="h6" fontFamily="Girassol">
-              Dashboard
-            </Typography>
             <IconButton
               size="large"
               edge="start"
@@ -68,23 +67,26 @@ export default function Navbar() {
                   borderRadius: "5px",
                   backgroundColor: "inherit",
                   height: "95px",
+                  position: "absolute",
+                  marginLeft:"60px",
+                  marginTop:"60px"
                 }}
               />
             </IconButton>
+            <Typography variant="h6" fontFamily="Girassol" sx={{ mt:7, ml:3 }}>
+              Dashboard
+            </Typography>
           </div>
           <Typography
-            variant="h4"
+            variant="h2"
             fontFamily="Girassol"
             component="div"
             sx={{ flexGrow: 1 }}
           >
-            Superbikes Blog
+            Superbike Blogs
           </Typography>
           {auth && (
             <div>
-              <Typography variant="h6" fontFamily="Girassol">
-                Menu
-              </Typography>
               <IconButton
                 size="large"
                 aria-label="account of current user"
@@ -97,13 +99,19 @@ export default function Navbar() {
                   src={menuLogo}
                   alt=""
                   sx={{ mr: 2 }}
-                  style={{
-                    borderRadius: "5px",
-                    backgroundColor: "inherit",
-                    height: "75px",
-                  }}
+                    style={{
+                      borderRadius: "5px",
+                      backgroundColor: "inherit",
+                      height: "95px",
+                      position: "absolute",
+                      marginRight:"60px",
+                      marginTop:"60px"
+                    }}
                 />
               </IconButton>
+              <Typography variant="h6" fontFamily="Girassol" sx={{ mt:7, mr:7 }}>
+                Menu
+              </Typography>
               {currentUser?.email ? (
                 <Menu
                   id="menu-appbar"

@@ -52,10 +52,10 @@ export default function BlogCard({post}) {
   // };
 
   return (
-    <Card sx={{ maxWidth: 345, m:"10px", bgcolor: grey[300]}} >
+    <Card sx={{ maxWidth: 345, m:"10px", bgcolor: red[600], border:3 }} >
       <CardHeader
         avatar={
-          <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">
+          <Avatar sx={{ bgcolor: grey[900] }} aria-label="recipe">
             sbk
           </Avatar>
         }
@@ -64,8 +64,8 @@ export default function BlogCard({post}) {
             <MoreVertIcon />
           </IconButton>
         }
-        title={title + " " +"(by " + author + ")"}
-        subheader={published_date}
+        title={title}
+        // subheader={published_date}
       />
       <CardMedia
         component="img"
@@ -73,6 +73,7 @@ export default function BlogCard({post}) {
         image={image || title}
         alt={title}
         onClick={openDetails}
+        sx={{border:1}}
       />
       <CardContent>
         <Typography variant="body2" color="text.secondary">

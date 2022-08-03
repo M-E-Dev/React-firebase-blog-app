@@ -8,7 +8,10 @@ import AppRouter from "./router/AppRouter";
 
 function App() {
   return (
-    <div className="App">
+    <div className="App" style={{  
+      backgroundColor:"#536872",
+      height:"100vh",
+    }}>
       <AuthContextProvider>
         <BlogContextProvider>
           <AppRouter />

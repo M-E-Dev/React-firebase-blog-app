@@ -10,7 +10,7 @@ import Avatar from '@mui/material/Avatar';
 import IconButton, { IconButtonProps } from '@mui/material/IconButton';
 import ChatBubbleOutlineIcon from '@mui/icons-material/ChatBubbleOutline';
 import Typography from '@mui/material/Typography';
-import { red } from '@mui/material/colors';
+import { grey, blue, red } from '@mui/material/colors';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import ShareIcon from '@mui/icons-material/Share';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
@@ -52,7 +52,7 @@ export default function BlogCard({post}) {
   // };
 
   return (
-    <Card sx={{ maxWidth: 345 }} >
+    <Card sx={{ maxWidth: 345, m:"10px", bgcolor: grey[300]}} >
       <CardHeader
         avatar={
           <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">

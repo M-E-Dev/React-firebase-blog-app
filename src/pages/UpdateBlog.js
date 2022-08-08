@@ -1,8 +1,7 @@
 import React, { useEffect, useMemo, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom';
-import { useAuth } from '../contexts/AuthContextProvider'
 import { useBlog } from '../contexts/BlogContextProvider';
-import { Grid, TextField, Button, Stack, Box } from "@mui/material";
+import { Grid } from "@mui/material";
 import { BlogForm } from '../components/BlogForm';
 import placeholderPng from "../assets/placeholder.png"
 

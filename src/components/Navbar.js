@@ -11,8 +11,6 @@ import bikeLogo from "../assets/bike.png";
 import menuLogo from "../assets/menu.png";
 import { useAuth } from "../contexts/AuthContextProvider";
 import { Link, Navigate, useNavigate } from "react-router-dom";
-import { Logout } from "@mui/icons-material";
-import Dashboard from "../pages/Dashboard";
 import { grey, blue, red } from '@mui/material/colors';
 
 

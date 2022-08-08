@@ -1,5 +1,4 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import About from "../pages/About";
 import Dashboard from "../pages/Dashboard";
 import Detail from "../pages/Detail";
 // import Login from "../pages/Login";
@@ -10,7 +9,6 @@ import Profile from "../pages/Profile";
 import NotFound from "../pages/NotFound";
 import PrivateRouter from "./PrivateRouter";
 import Navbar from "../components/Navbar";
-import Authorization from "../components/Authorization";
 import { Login, Register } from "../pages/LoginRegister";
 
 const AppRouter = () => {
@@ -26,7 +24,6 @@ const AppRouter = () => {
         </Route>
 
         <Route path="/" exact element={<Dashboard />} />
-        <Route path="/about" element={<About />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="*" element={<NotFound />} />

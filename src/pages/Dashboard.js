@@ -2,7 +2,6 @@ import React from "react";
 import BlogCard from "../components/BlogCard";
 import { useBlog } from "../contexts/BlogContextProvider";
 import Typography from "@mui/material/Typography";
-import { grey, blue, red } from '@mui/material/colors';
 import Grid from "@mui/material/Grid";
 
 const Dashboard = () => {

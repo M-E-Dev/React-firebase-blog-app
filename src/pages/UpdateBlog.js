@@ -39,17 +39,17 @@ const UpdateBlog = () => {
 
   return (
     <div
-      style={{ display: "flex", justifyContent: "center", marginTop: "3rem"}}
+      style={{ display: "flex", justifyContent: "center", marginTop: "1rem", maxHeight:"80%"}}
     >
       <Grid
         container
         textAlign="center"
         direction="column"
-        style={{ width: "150px" }}
+        alignItems="center"
+        alignContent="center"
+        style={{ width: "80vh" }}
       >
         <img src={updatedBlog?.image || placeholderPng} alt="blog" style={{ width: "300px" }}/>
-        <h2 className="contact-header">────Update Blog────</h2>
-
         <BlogForm blog={updatedBlog} handler={handler} />
 
 

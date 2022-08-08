@@ -8,8 +8,7 @@ import Grid from "@mui/material/Grid";
 const Dashboard = () => {
   const { currentBlogs } = useBlog();
   return (
-    <div>
-      <Grid >
+      <Grid sx={{height:"100%"}} >
         <Typography variant="h6" noWrap sx={{ mt:"20px" }}>
           To see details of a blog, click to its image...
         </Typography>
@@ -39,7 +38,6 @@ const Dashboard = () => {
           </Grid>
         </Grid>
       </Grid>
-    </div>
   );
 };
 

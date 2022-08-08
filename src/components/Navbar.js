@@ -48,7 +48,7 @@ export default function Navbar() {
 
   return (
     <Box sx={{ flexGrow: 1, bgcolor: red[500]}}>
-      <AppBar position="static" style={{ height: "15vh" }} sx={{ bgcolor: red[900]}}className="navbar">
+      <AppBar position="static" style={{ height: "15vh" }} sx={{ bgcolor: grey[900]}}className="navbar">
         <Toolbar>
           <div className="dashboard">
             <IconButton

@@ -15,6 +15,7 @@ import Grid from "@mui/material/Grid";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
+import { grey, blue, red, lime, orange, lightBlue } from '@mui/material/colors';
 import authPng from "../assets/auth.png";
 import { Login } from "../pages/LoginRegister";
 import { ToastContainer, toast } from 'react-toastify';
@@ -62,7 +63,7 @@ const LoginAndRegisterForm = (props) => {
         component={Paper}
         elevation={12}
         square
-        sx={{ width: "60vf", height: "60vh", mt: 8, borderRadius: 5 }}
+        sx={{ width: "60vf", height: "70vh", mt: 8, borderRadius: 5, bgcolor: grey[300] }}
       >
         <Box
           sx={{

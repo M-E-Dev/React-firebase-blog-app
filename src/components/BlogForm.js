@@ -10,7 +10,7 @@ export const BlogForm = (props) => {
   }, [blog])
 
   return (
-    <Box style={{ backgroundColor: "white", padding: "20px" }}>
+    <Box style={{ backgroundColor: "white", padding: "20px", maxHeight:"60%", width:"100vh"}}>
       <form onSubmit={ () => handler(newBlog)} >
         <Stack spacing={3} direction="column">
           <TextField
@@ -47,7 +47,7 @@ export const BlogForm = (props) => {
             placeholder="Content"
             required
             multiline
-            rows={7}
+            rows={5}
           />
 
           <Button

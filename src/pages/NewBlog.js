@@ -34,13 +34,13 @@ const NewBlog = () => {
 
   return (
     <div
-      style={{ display: "flex", justifyContent: "center", marginTop: "3rem" }}
+      style={{ display: "flex", justifyContent: "center", marginTop: "3rem", borderRadius:"20px" }}
     >
-      <Grid
+    <Grid  
         container
         textAlign="center"
         direction="column"
-        style={{ width: "300px" }}
+        style={{ width: "100vh", borderRadius:"20px" }}
       >
         <h2 className="contact-header">────New Blog────</h2>
 
